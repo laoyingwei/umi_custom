@@ -73,7 +73,7 @@ export const renderClient = (opts) => {
   //   clientRoutes: clientRoutes,
   //   history: opts.history
   // }, React.createElement(Routes, null));
-  const rootContainer = <BrowserRoutes
+  let rootContainer = <BrowserRoutes
     basename={basename}
     pluginManager={opts.pluginManager}
     routes={opts.routes}
@@ -83,6 +83,26 @@ export const renderClient = (opts) => {
     <Routes />
 
   </BrowserRoutes>
+
+// innerProvider -> i18nProvider -> accessProvider -> dataflowProvider -> outerProvider -> rootContainer
+
+for (const key of [
+  // Lowest to the highest priority
+  'innerProvider',
+  'i18nProvider',
+  'accessProvider',
+  'dataflowProvider',
+  'outerProvider',
+  'rootContainer',
+]) {
+  rootContainer = opts.pluginManager.applyPlugins({
+    type: 'modify',
+    key: key,
+    initialValue: rootContainer,
+    args: {},
+  });
+}
+
   // const rootContainer = React.createElement('div',null,'我是一个标签');
   function Browser() {
     return React.createElement(AppContext.Provider, {

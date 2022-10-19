@@ -1,6 +1,7 @@
 
 
 import * as Plugin_0 from '@/runtime';
+import * as Plugin_initialState from '@/core/plugin-initialState';
 import { assert, compose, isPromiseLike } from "./utils";
 import { ApplyPluginsType } from './ApplyPluginsType'
 import _typeof from "@babel/runtime/helpers/typeof";
@@ -85,8 +86,12 @@ export function getPlugins() {
     return [
       {
         apply: __defaultExport(Plugin_0),
-        path: process.env.NODE_ENV === 'production' ? void 0 : 'F:/learn/umi_4/src/app.ts',
+        // path: process.env.NODE_ENV === 'production' ? void 0 : 'F:/learn/umi_4/src/app.ts',
       },
+      {
+        apply:Plugin_initialState,
+        // path: process.env.NODE_ENV === 'production' ? void 0 : 'F:/learn/umi_4/src/app.ts',
+      }
     ];
   }
   

@@ -17,3 +17,17 @@ export function render (oldRender) {
     }]
     oldRender()
 }
+
+export function onRouteChange (opts) {
+    console.log(opts)
+}
+
+
+export async function getInitialState () {
+    console.log('获取初始值')
+    return {
+        a:'1',
+        b:'2'
+    }
+}
+
