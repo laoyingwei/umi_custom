@@ -5,8 +5,8 @@ export async function getRoutes() {
   return {
     routes: { 
       "1": { "path": "/", "redirect": "/home", "parentId": "@@/global-layout", "id": "1" },
-     "2": { "name": "首页", "path": "/home", "file": "@/pages/Home/index.jsx", "parentId": "@@/global-layout", "id": "2" }, 
-     "3": { "name": "权限演示", "path": "/access", "file": "@/pages/Access/index.jsx", "parentId": "@@/global-layout", "id": "3" },
+      "2": { "name": "首页", "path": "/home", "file": "@/pages/Home/index.jsx", "parentId": "@@/global-layout", "id": "2" }, 
+      "3": { "name": "权限演示", "path": "/access", "file": "@/pages/Access/index.jsx", "parentId": "@@/global-layout", "id": "3" },
       "4": { "name": " CRUD 示例", "path": "/table", "file": "@/pages/Table/index.jsx", "parentId": "@@/global-layout", "id": "4" }, 
       "5": { "path": "/", "file": "@/layouts/index.jsx", "parentId": "@@/global-layout", "id": "5" },
       "6": { "path": "/list", "file": "@/pages/list/index.jsx", "parentId": "5", "id": "6" },
