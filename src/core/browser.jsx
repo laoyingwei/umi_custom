@@ -1,6 +1,6 @@
 
 import ReactDOM from 'react-dom/client';
-import { matchRoutes, Router, useRoutes } from 'react-router-dom';
+import { matchRoutes, Router, useRoutes, BrowserRouter } from 'react-router-dom';
 import { useAppData, AppContext } from './appContext'
 import React from 'react';
 import { createClientRoutes } from './createClientRoutes'
@@ -14,9 +14,11 @@ function BrowserRoutes(props) {
     action: history.action,
     location: history.location,
   });
+  ///作用 导航到对应的路径
   React.useLayoutEffect(() => history.listen(setState), [history]);
   React.useLayoutEffect(() => {
     function onRouteChange(opts) {
+      console.log(opts)
       props.pluginManager.applyPlugins({
         key: 'onRouteChange',
         type: 'event',
@@ -66,13 +68,6 @@ export const renderClient = (opts) => {
       routes: clientRoutes
     }
   });
-  // const rootContainer = React.createElement(BrowserRoutes, {
-  //   basename: basename,
-  //   pluginManager: opts.pluginManager,
-  //   routes: opts.routes,
-  //   clientRoutes: clientRoutes,
-  //   history: opts.history
-  // }, React.createElement(Routes, null));
   let rootContainer = <BrowserRoutes
     basename={basename}
     pluginManager={opts.pluginManager}
@@ -81,50 +76,50 @@ export const renderClient = (opts) => {
     history={opts.history}
   >
     <Routes />
-
   </BrowserRoutes>
 
-// innerProvider -> i18nProvider -> accessProvider -> dataflowProvider -> outerProvider -> rootContainer
+  // innerProvider -> i18nProvider -> accessProvider -> dataflowProvider -> outerProvider -> rootContainer
 
-for (const key of [
-  // Lowest to the highest priority
-  'innerProvider',
-  'i18nProvider',
-  'accessProvider',
-  'dataflowProvider',
-  'outerProvider',
-  'rootContainer',
-]) {
-  rootContainer = opts.pluginManager.applyPlugins({
-    type: 'modify',
-    key: key,
-    initialValue: rootContainer,
-    args: {},
-  });
-}
+  for (const key of [
+    // Lowest to the highest priority
+    'innerProvider',
+    'i18nProvider',
+    'accessProvider',
+    'dataflowProvider',
+    'outerProvider',
+    'rootContainer',
+  ]) {
+    rootContainer = opts.pluginManager.applyPlugins({
+      type: 'modify',
+      key: key,
+      initialValue: rootContainer,
+      args: {},
+    });
+  }
 
-  // const rootContainer = React.createElement('div',null,'我是一个标签');
   function Browser() {
-    return React.createElement(AppContext.Provider, {
-      value: {
+    return <AppContext.Provider
+      value={{
         routes: opts.routes,
         routeComponents: opts.routeComponents,
         clientRoutes: clientRoutes,
         pluginManager: opts.pluginManager,
         rootElement: opts.rootElement,
         basename: basename,
-        // clientLoaderData: clientLoaderData,
-        // serverLoaderData: serverLoaderData,
-        // preloadRoute: handleRouteChange,
         history: opts.history
+      }}>
+
+      {
+        rootContainer
       }
-    }, rootContainer);
+
+    </AppContext.Provider>
   }
 
   if (ReactDOM.createRoot) {
     root = ReactDOM.createRoot(rootElement);
-    root.render(React.createElement(Browser, null));
+    root.render(<Browser />);
   } else {
-    ReactDOM.render(React.createElement(Browser, null), rootElement);
+    ReactDOM.render(<Browser />, rootElement);
   }
 }

@@ -60,7 +60,7 @@ module.exports = {
       : "static/js/[name].chunk.js",
     assetModuleFilename: "static/media/[hash:10][ext][query]",
     clean: true,
-    publicPath: '/'
+    publicPath: isProduction ? '/dist/' : '/'
   },
   module: {
     rules: [
@@ -111,6 +111,7 @@ module.exports = {
               plugins: [
                 // "@babel/plugin-transform-runtime",  // presets中包含了
                 !isProduction && "react-refresh/babel",
+                isProduction && "transform-remove-console",
                 // style 设置为  true  引入 antd 的主题 less 变量
                 ['import', { libraryName: 'antd', style:  true }],
               ].filter(Boolean),
@@ -188,7 +189,7 @@ module.exports = {
 
     ///全局变量 设置
     new webpack.DefinePlugin({
-      NODE_SERVICE_URL: JSON.stringify(isProduction ? 'http://localhost:3000' : '/api'),
+      NODE_SERVICE_URL: JSON.stringify(isProduction ? 'http://localhost:80/api' : '/api'),
     }),
 
 

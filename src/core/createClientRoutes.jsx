@@ -60,7 +60,7 @@ function DefaultLoading () {
 
 
 function createClientRoute (opts) {
-    const { route,routeComponent,loadingComponent,reactRouter5Compat } = opts
+    const { route } = opts
     const { redirect, ...props } = route;
     
     return {

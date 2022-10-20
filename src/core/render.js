@@ -3,7 +3,8 @@ import { getRoutes } from './routes'
 import { createPluginManager } from './plugin';
 import { ApplyPluginsType } from './ApplyPluginsType'
 import { createHistory } from './history';
-import { renderClient } from './browser'
+import { renderClient } from './browser';
+import { Spin } from 'antd'
 const publicPath = "/";
 const runtimePublicPath = false;
 export default async () => {
@@ -42,6 +43,7 @@ export default async () => {
               ...contextOpts.historyOpts,
             }),
             basename,
+            loadingComponent:Spin
           };
 
          return  renderClient(context);
