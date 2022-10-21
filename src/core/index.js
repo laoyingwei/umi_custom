@@ -4,4 +4,6 @@ export { useRouteData } from './routeContext'
 
 export { useModel } from './plugin-model/index';
 
-export { useRequest } from './plugin-model/useRequest'
+export { useRequest } from './plugin-model/useRequest';
+
+export { useAccess,Access } from './plugin-access/useAccess';

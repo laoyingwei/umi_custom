@@ -28,6 +28,7 @@ function BrowserRoutes(props) {
           location: opts.location,
           action: opts.action,
           basename: props.basename,
+          history
         },
       });
     }

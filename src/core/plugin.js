@@ -2,6 +2,7 @@
 
 import * as Plugin_0 from '@/runtime';
 import * as Plugin_initialState from '@/core/plugin-initialState';
+import * as Plugin_access from '@/core/plugin-access';
 import { assert, compose, isPromiseLike } from "./utils";
 import { ApplyPluginsType } from './ApplyPluginsType'
 import _typeof from "@babel/runtime/helpers/typeof";
@@ -91,6 +92,9 @@ export function getPlugins() {
       {
         apply:Plugin_initialState,
         // path: process.env.NODE_ENV === 'production' ? void 0 : 'F:/learn/umi_4/src/app.ts',
+      },
+      {
+        apply:Plugin_access
       }
     ];
   }

@@ -9,5 +9,6 @@ export const models = {
  } 
 
 export function useModel (name,fn = '') {
+    // debugger
     return models[name](fn)
 }
