@@ -22,21 +22,21 @@ const token = true
 export function onRouteChange (opts) {
     // console.log(opts.history)
     // debugger
-    const { location,routes } = opts
-    const { pathname } = location
-    let route = {}
-    Object.keys(routes).find(key => {
+    // const { location,routes } = opts
+    // const { pathname } = location
+    // let route = {}
+    // Object.keys(routes).find(key => {
        
-        if(routes[key].path === pathname) {
-            route = routes[key]
-            return true
-        }
-        return false
-    })
-    if(!route.auth) return false
-    if(!token && opts.location.pathname !== '/login') {
-        opts.history.replace('/login')
-    }
+    //     if(routes[key].path === pathname) {
+    //         route = routes[key]
+    //         return true
+    //     }
+    //     return false
+    // })
+    // if(!route.auth) return false
+    // if(!token && opts.location.pathname !== '/login') {
+    //     opts.history.replace('/login')
+    // }
    
 }
 

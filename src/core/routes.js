@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { routeConfig } from '/.umi.js'
+
+
 export async function getRoutes() {
   const routes = {}
   const routeComponents = {}
@@ -18,15 +20,17 @@ export async function getRoutes() {
       }
   });
   }
+
+ 
   getRoute(routeConfig)
-  console.log(rotueList)
+
   rotueList.forEach((route,index) => {
      const { isLayout,name,file,path,parentId,component ,auth} = route
 
       if(isLayout) {
         routes[name] = {
           auth,
-          file,
+          // file,
           name,
           id: name,
           path,
@@ -35,8 +39,8 @@ export async function getRoutes() {
         routeComponents[name] = component
       }else {
         routes[index] = {
-          auth,
-          file,
+           auth,
+          // file,
           name,
           id: index,
           path,
