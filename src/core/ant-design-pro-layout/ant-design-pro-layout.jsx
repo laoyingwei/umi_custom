@@ -57,10 +57,10 @@ export default () => {
 
     const appData = useAppData()
     console.log(appData)
-    debugger
+    // debugger
     // {...defaultProps}
     const routes = ( appData && Object.values(appData.routes) || []).filter(item => !item.hideMenu)
-    debugger
+    // debugger
     return (<div id="test-pro-layout" style={{
             height: '100vh',
         }}>
