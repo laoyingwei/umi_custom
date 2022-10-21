@@ -25,7 +25,7 @@ export async function getRoutes() {
   getRoute(routeConfig)
 
   rotueList.forEach((route,index) => {
-     const { isLayout,name,file,path,parentId,component ,auth} = route
+     const { isLayout,name,file,path,parentId,component ,auth,hideMenu} = route
 
       if(isLayout) {
         routes[name] = {
@@ -34,7 +34,8 @@ export async function getRoutes() {
           name,
           id: name,
           path,
-          parentId
+          parentId,
+          hideMenu
         }
         routeComponents[name] = component
       }else {
@@ -44,7 +45,8 @@ export async function getRoutes() {
           name,
           id: index,
           path,
-          parentId
+          parentId,
+          hideMenu
         } 
         routeComponents[index] = component
       }

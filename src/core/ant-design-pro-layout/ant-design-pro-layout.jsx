@@ -54,6 +54,13 @@ export default () => {
     const location = useLocation()
     const navigate = useNavigate()
     const [num, setNum] = useState(40);
+
+    const appData = useAppData()
+    console.log(appData)
+    debugger
+    // {...defaultProps}
+    const routes = ( appData && Object.values(appData.routes) || []).filter(item => !item.hideMenu)
+    debugger
     return (<div id="test-pro-layout" style={{
             height: '100vh',
         }}>
@@ -76,7 +83,15 @@ export default () => {
                 left: 0,
                 width: '331px',
             },
-        ]} {...defaultProps} location={location} siderMenuType="group" menu={{
+        ]}  
+        // route = {
+        //   {
+        //     path:'/',
+        //     routes
+        //   }
+        // }
+        {...defaultProps}
+        location={location} siderMenuType="group" menu={{
             collapsedShowGroupTitle: true,
         }} avatarProps={{
             src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',

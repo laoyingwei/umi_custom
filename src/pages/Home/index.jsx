@@ -40,41 +40,5 @@ export default () => {
         <Access auth="canSee" />
         <Button onClick={() => jump()}>跳转1</Button>
         <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => jump()}>跳转</Button>
-        <Button onClick={() => refresh()}>刷新</Button>
     </div>
 }
