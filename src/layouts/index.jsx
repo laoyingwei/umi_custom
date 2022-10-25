@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-
+import request from '@/utils/request'
 const Layout = (props) =>{
 
     return <div>
@@ -10,3 +10,7 @@ const Layout = (props) =>{
 }
 
 export default Layout
+
+export async function clientLoader () {
+     return request.get('user/info')
+}

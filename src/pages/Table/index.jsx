@@ -1,5 +1,5 @@
 
 
 export default () => {
-    return <div>Home</div>
+    return <div>Table</div>
 }

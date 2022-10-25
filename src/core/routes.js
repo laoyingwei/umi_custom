@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { routeConfig } from '/.umi.js'
+import loader from './loader'
 
 
 export async function getRoutes() {
@@ -25,29 +26,43 @@ export async function getRoutes() {
   getRoute(routeConfig)
 
   rotueList.forEach((route,index) => {
-     const { isLayout,name,file,path,parentId,component ,auth,hideMenu} = route
+     const { isLayout,name,file,path,parentId,component ,auth,hideMenu,title,clientLoader} = route
 
       if(isLayout) {
         routes[name] = {
+          ...route,
           auth,
           // file,
           name,
           id: name,
           path,
           parentId,
-          hideMenu
+          hideMenu,
+          name:title,
+          // clientLoader
         }
+        if(clientLoader) {
+          loader[name] = clientLoader
+        }
+       
         routeComponents[name] = component
+
       }else {
         routes[index] = {
+          ...route,
            auth,
           // file,
           name,
           id: index,
           path,
           parentId,
-          hideMenu
+          hideMenu,
+          name:title
         } 
+        if(clientLoader) {
+          loader[index] = clientLoader
+        }
+       
         routeComponents[index] = component
       }
 

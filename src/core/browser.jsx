@@ -1,11 +1,11 @@
 
 import ReactDOM from 'react-dom/client';
-import { matchRoutes, Router, useRoutes, BrowserRouter } from 'react-router-dom';
+import { matchRoutes, Router, useRoutes, BrowserRouter, } from 'react-router-dom';
 import { useAppData, AppContext } from './appContext'
-import React from 'react';
+import React, { useEffect,useState,useCallback   } from 'react';
 import { createClientRoutes } from './createClientRoutes'
 let root = null;
-
+import loader from './loader'
 
 
 function BrowserRoutes(props) {
@@ -18,7 +18,6 @@ function BrowserRoutes(props) {
   React.useLayoutEffect(() => history.listen(setState), [history]);
   React.useLayoutEffect(() => {
     function onRouteChange(opts) {
-      console.log(opts)
       props.pluginManager.applyPlugins({
         key: 'onRouteChange',
         type: 'event',
@@ -99,6 +98,40 @@ export const renderClient = (opts) => {
   }
 
   function Browser() {
+    const [clientLoaderData, setClientLoaderData] = useState({});
+
+    const handleRouteChange = useCallback((id,isFirst) => {
+      const matchedRouteIds = (
+        matchRoutes(clientRoutes, id, basename)?.map(
+          // @ts-ignore
+          (route) => route.route.id,
+        ) || []
+      ).filter(Boolean);
+      // console.log(matchedRouteIds)
+      // debugger
+      matchedRouteIds.forEach(id => {
+        const clientLoader = loader[id] ;
+        // && !clientLoaderData[id] 
+        if (clientLoader) {
+          clientLoader().then((data) => {
+            setClientLoaderData((d) => ({ ...d, [id]: data || {} }));
+          }).catch(e =>{
+            setClientLoaderData((d) => ({ ...d, [id]:  {} }));
+          })
+        }
+      })
+    },[clientLoaderData])
+    
+
+
+    useEffect(() => {
+      handleRouteChange(window.location.pathname,true)
+      return opts.history.listen((e) => {
+        // debugger
+        handleRouteChange(e.location.pathname);
+      });
+    },[])
+
     return <AppContext.Provider
       value={{
         routes: opts.routes,
@@ -107,7 +140,8 @@ export const renderClient = (opts) => {
         pluginManager: opts.pluginManager,
         rootElement: opts.rootElement,
         basename: basename,
-        history: opts.history
+        clientLoaderData,
+        history: opts.history,
       }}>
 
       {

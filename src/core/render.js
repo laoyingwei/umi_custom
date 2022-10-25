@@ -1,14 +1,15 @@
 
 import { getRoutes } from './routes'
-import { createPluginManager } from './plugin';
+import { createPluginManager,getPluginManager } from './plugin';
 import { ApplyPluginsType } from './ApplyPluginsType'
 import { createHistory } from './history';
 import { renderClient } from './browser';
 import { Spin } from 'antd'
 const publicPath = "/";
 const runtimePublicPath = false;
+
 export default async () => {
-    const pluginManager = createPluginManager() 
+  const pluginManager = getPluginManager() 
     let { routes ,routeComponents} =  await getRoutes(pluginManager)
 
     pluginManager.applyPlugins({

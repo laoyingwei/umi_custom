@@ -1,10 +1,9 @@
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
 let extraRoutes;
 
 export function patchClientRoutes ({ routes }) {
-    console.log('触发到了')
-    console.log(extraRoutes)
     // debugger
     return [...routes,extraRoutes]
 
@@ -59,4 +58,12 @@ export async function getInitialState () {
 //         ]
 //    }
 }
+
+
+
+// export function rootContainer (container) {
+//    return  React.createElement(ConfigProvider,{
+//     // prefixCls:'custom'
+//    },container)
+// }
 

@@ -3,7 +3,7 @@ import ProCard from '@ant-design/pro-card';
 import { PageContainer, ProLayout, SettingDrawer } from '@ant-design/pro-layout';
 import { css } from '@emotion/css';
 import { Button, Divider, Dropdown, Input } from 'antd';
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import defaultProps from './_defaultProps';
 import { Outlet,useLocation,useNavigate } from 'react-router-dom';
 import { useAppData } from '@/core/appContext'
@@ -56,11 +56,10 @@ export default () => {
     const [num, setNum] = useState(40);
 
     const appData = useAppData()
-    console.log(appData)
+    // console.log(appData)
     // debugger
     // {...defaultProps}
     const routes = ( appData && Object.values(appData.routes) || []).filter(item => !item.hideMenu)
-    // debugger
     return (<div id="test-pro-layout" style={{
             height: '100vh',
         }}>
@@ -84,13 +83,13 @@ export default () => {
                 width: '331px',
             },
         ]}  
-        // route = {
-        //   {
-        //     path:'/',
-        //     routes
-        //   }
-        // }
-        {...defaultProps}
+        route = {
+          {
+            path:'/',
+            routes
+          }
+        }
+        // {...defaultProps}
         location={location} siderMenuType="group" menu={{
             collapsedShowGroupTitle: true,
         }} avatarProps={{

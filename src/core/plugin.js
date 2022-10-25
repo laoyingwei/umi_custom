@@ -3,6 +3,7 @@
 import * as Plugin_0 from '@/runtime';
 import * as Plugin_initialState from '@/core/plugin-initialState';
 import * as Plugin_access from '@/core/plugin-access';
+import * as Plugin_locale from '@/core/plugin-locale'
 import { assert, compose, isPromiseLike } from "./utils";
 import { ApplyPluginsType } from './ApplyPluginsType'
 import _typeof from "@babel/runtime/helpers/typeof";
@@ -95,6 +96,9 @@ export function getPlugins() {
       },
       {
         apply:Plugin_access
+      },
+      {
+        apply:Plugin_locale
       }
     ];
   }
@@ -105,7 +109,7 @@ export function getPlugins() {
   
 
 
-export function createPluginManager (opts) {
+export function createPluginManager () {
     const pluginManager = new PluginManager({
         validKeys: getValidKeys(),
     })
@@ -115,3 +119,11 @@ export function createPluginManager (opts) {
     return pluginManager;
 }
 
+
+
+ const pluginManager = createPluginManager() 
+
+
+ export function getPluginManager () {
+  return pluginManager
+ }
