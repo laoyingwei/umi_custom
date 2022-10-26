@@ -10,7 +10,8 @@ const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const chalk = require("chalk");
 const CopyPlugin = require("copy-webpack-plugin");
 const webpack  = require('webpack')
-
+const aliyunTheme = require('@ant-design/aliyun-theme');
+const { getThemeVariables } = require('antd/dist/theme');
 // 需要通过 cross-env 定义环境变量
 const isProduction = process.env.NODE_ENV === "production";
 const getStyleLoaders = (preProcessor) => {
@@ -36,12 +37,18 @@ const getStyleLoaders = (preProcessor) => {
           ? {
             // antd的自定义主题
             lessOptions: {
-              modifyVars: {
-                // 其他主题色：https://ant.design/docs/react/customize-theme-cn
-                // "@primary-color": "#9540b9", // 全局主色
-              },
+              modifyVars:aliyunTheme.default,
+              // {
+              //   // 其他主题色：https://ant.design/docs/react/customize-theme-cn
+              //   "@primary-color": "#9540b9", // 全局主色
+              // },
+                  // modifyVars: getThemeVariables({
+                  //     dark: true, // 开启暗黑模式
+                  //     compact: true, // 开启紧凑模式
+                  // }),
               javascriptEnabled: true,
             },
+          
           }
           : {},
     },

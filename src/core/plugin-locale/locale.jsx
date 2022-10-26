@@ -1,6 +1,6 @@
 
 import { ConfigProvider } from 'antd'
-import React from 'react';
+import React,{ useState }from 'react';
 import { getPluginManager } from '@/core/plugin';
 import enUS0 from 'antd/es/locale/en_US';
 import zhCN0 from 'antd/es/locale/zh_CN';
@@ -75,7 +75,6 @@ const getLocale = () => {
     initialValue: {},
   });
   // console.log(runtimeLocale)
-  // debugger
   if (typeof runtimeLocale?.getLocale === 'function') {
     return runtimeLocale.getLocale()
   }
@@ -94,7 +93,7 @@ const getLocale = () => {
 
 export const setLocale = (lang, realReload) => {
   const updater = () => {
-    if (getLocale() !== lang) {
+    // if (getLocale() !== lang) {
       if (navigator.cookieEnabled && typeof window.localStorage !== 'undefined' && useLocalStorage) {
         window.localStorage.setItem('umi_locale', lang || '');
      }
@@ -109,7 +108,7 @@ export const setLocale = (lang, realReload) => {
           window.dispatchEvent(event);
         }
       }
-    }
+    // }
   }
   updater()
 }
@@ -123,6 +122,11 @@ const getDirection = () => {
   return direction;
 };
 
+const setMomentLocale =  (locale) =>  {
+  if (moment?.locale) {
+    moment.locale(localeInfo[locale]?.momentLocale || 'en');
+  }
+}
 
 export const _LocaleContainer = (props) => {
 
@@ -137,21 +141,25 @@ export const _LocaleContainer = (props) => {
   const [intl, setContainerIntl] = React.useState(() => getIntl(locale, true));
   const direction = getDirection();
   const handleLangChange = (locale) => {
-    debugger
-    if (moment?.locale) {
-      moment.locale(localeInfo[locale]?.momentLocale || 'en');
-    }
+    ///设置日期格式化的国际化
+    setMomentLocale(locale)
+
+    //设置 antd design 的组件的国际化
     setLocale(locale);
+    ///全局国际化语言的设置 可以通过 useLocalData 使用 可以使用 LocaleContext.Consumer 使用
     setContainerIntl(getIntl(locale));
   };
   useIsomorphicLayoutEffect(() => {
-    event.on(LANG_CHANGE_EVENT, handleLangChange);
+    event.on(LANG_CHANGE_EVENT,  handleLangChange);
     return () => {
       event.off(LANG_CHANGE_EVENT, handleLangChange);
     };
   }, []);
   const defaultAntdLocale = {
   }
+  ///设置日期格式化的国际化
+  setMomentLocale(locale)
+  // prefixCls="custom"
   return (
     <ConfigProvider direction={direction} locale={localeInfo[locale]?.antd || defaultAntdLocale}>
       <LocaleContext.Provider value={intl}>{props.children}</LocaleContext.Provider>

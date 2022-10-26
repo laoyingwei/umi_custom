@@ -1,19 +1,20 @@
 
-import { useAppData,useRouteData,useClientLoaderData,useLocalData,setLocale } from '@/core/index';
-import { Button,DatePicker } from 'antd';
+import { useAppData, useRouteData, useClientLoaderData, useLocalData, setLocale,LocaleContext } from '@/core/index';
+import { Button, DatePicker,ConfigProvider,Switch } from 'antd';
 const { RangePicker } = DatePicker;
 import request from '@/utils/request'
-import { useEffect } from 'react';
-import { useModel,useRequest,useAccess,Access } from '@/core/index';
+import { useEffect, useState } from 'react';
+import { useModel, useRequest, useAccess, Access } from '@/core/index';
+import moment from 'moment'
 export default () => {
-    const useData  = useAppData()
+    const useData = useAppData()
     const useRoute = useRouteData()
-    const { refresh,setInitialState,loading} = useModel('@@initialState')
+    const { refresh, setInitialState, loading } = useModel('@@initialState')
     // const { loading:requestLoading,data } = useRequest(() => {
     //     return request.get('/user/info')
     // })
     const jump = () => {
-       useData.history.push('/access')
+        useData.history.push('/access')
     }
     const access = useAccess()
 
@@ -21,6 +22,9 @@ export default () => {
 
     const localData = useLocalData()
     console.log(localData)
+    console.log(moment(1316116057189).fromNow())
+   
+   
     // useEffect(() => {
     //     request.get('/user/info').then(res => {
     //         console.log(res)
@@ -30,22 +34,29 @@ export default () => {
         {/* {
             JSON.stringify(useData.routes)
         } */}
-       
-           {
-            JSON.stringify( useRoute.route)
-           }
-           
-           {/* {
+
+        {
+            JSON.stringify(useRoute.route)
+        }
+
+        {/* {
             JSON.stringify(data)
            } */}
-          
-           {
+
+        {
             JSON.stringify(access)
-           }
+        }
         <Access auth="canSee" />
-        <Button onClick={() => jump()}>跳转1</Button>
+        <Button type='primary' onClick={() => jump()}>跳转1</Button>
         <Button onClick={() => refresh()}>刷新</Button>
-        <Button onClick={() => setLocale('en-US')}>设置语言</Button>
+        <Button onClick={() => setLocale('zh-CN')}>设置语言</Button>
+        <Button type="primary">Primary Button</Button>
+    <Button>Default Button</Button>
+    <Button type="dashed">Dashed Button</Button>
+    <br />
+    <Button type="text">Text Button</Button>
+    <Button type="link">Link Button</Button>
+    {/* <Button type="link" onClick={() => setColor()}>设置颜色</Button> */}
         <RangePicker />
         {/* <Button onClick={setClientLoaderData}></Button> */}
         <div>
@@ -53,12 +64,24 @@ export default () => {
                 JSON.stringify(clientLoaderData.data)
             }
         </div>
-       
+        {
+            moment(1316116057189).fromNow()
+        }
+  
+    <Switch defaultChecked />;
+    <LocaleContext.Consumer>
+        {
+            e => {
+                console.log(e)
+               return  <Button >设置颜色</Button>
+            }
+        }
+    </LocaleContext.Consumer>
     </div>
 }
 
 
-export  async function clientLoader () {
+export async function clientLoader() {
     console.log('执行了Access')
     const data = await request.get('user/info')
 

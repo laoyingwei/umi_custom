@@ -9,4 +9,6 @@ export { useRequest } from './plugin-model/useRequest';
 export { useAccess,Access } from './plugin-access/useAccess';
 
 export { useLocalData } from './plugin-locale/context';
-export { setLocale } from './plugin-locale/locale'
+export { setLocale } from './plugin-locale/locale';
+
+export { LocaleContext } from './plugin-locale/context'

@@ -1,5 +1,6 @@
 import { useAppData,useRouteData,useClientLoaderData } from '@/core/index';
-import request from '@/utils/request'
+import request from '@/utils/request';
+import { Button } from 'antd'
 export default () => {
     const clientLoaderData = useClientLoaderData()
     return <div>
@@ -10,6 +11,7 @@ export default () => {
                 JSON.stringify(clientLoaderData.data)
             }
         </div>
+        <Button type='primary'>跳转1</Button>
     </div>
 }
 
