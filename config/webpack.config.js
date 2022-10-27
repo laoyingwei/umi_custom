@@ -9,12 +9,12 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const chalk = require("chalk");
 const CopyPlugin = require("copy-webpack-plugin");
-const webpack  = require('webpack')
+const webpack = require('webpack')
 const aliyunTheme = require('@ant-design/aliyun-theme');
 const { getThemeVariables } = require('antd/dist/theme');
 // 需要通过 cross-env 定义环境变量
 const isProduction = process.env.NODE_ENV === "production";
-
+const htmlTitle = 'react项目'
 const getStyleLoaders = (preProcessor) => {
   return [
     isProduction ? MiniCssExtractPlugin.loader : "style-loader",
@@ -38,18 +38,18 @@ const getStyleLoaders = (preProcessor) => {
           ? {
             // antd的自定义主题
             lessOptions: {
-              modifyVars:aliyunTheme.default,
+              modifyVars: aliyunTheme.default,
               // {
               //   // 其他主题色：https://ant.design/docs/react/customize-theme-cn
               //   "@primary-color": "#9540b9", // 全局主色
               // },
-                  // modifyVars: getThemeVariables({
-                  //     dark: true, // 开启暗黑模式
-                  //     compact: true, // 开启紧凑模式
-                  // }),
+              // modifyVars: getThemeVariables({
+              //     dark: true, // 开启暗黑模式
+              //     compact: true, // 开启紧凑模式
+              // }),
               javascriptEnabled: true,
             },
-          
+
           }
           : {},
     },
@@ -121,7 +121,7 @@ module.exports = {
                 !isProduction && "react-refresh/babel",
                 isProduction && "transform-remove-console",
                 // style 设置为  true  引入 antd 的主题 less 变量
-                ['import', { libraryName: 'antd', style:  true }],
+                ['import', { libraryName: 'antd', style: true }],
               ].filter(Boolean),
             },
           },
@@ -138,7 +138,7 @@ module.exports = {
                 loader: 'css-loader',
                 options: {
                   modules: {
-                    localIdentName: isProduction ?  '[local]_[hash:base64]' : '[path][name]__[local]'
+                    localIdentName: isProduction ? '[local]_[hash:base64]' : '[path][name]__[local]'
                   }
                 }
               },
@@ -163,7 +163,10 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "../public/index.html"),
-      title:'你大爷的'
+      title: htmlTitle,
+      // 这个地址是相对于绝对路径下的 public 目录的意思
+      favicon: './public/favicon.ico',
+      
     }),
     isProduction &&
     new MiniCssExtractPlugin({
@@ -172,8 +175,8 @@ module.exports = {
     }),
     !isProduction && new ReactRefreshWebpackPlugin(),
 
-     // 将public下面的资源复制到dist目录去（除了index.html）
-     isProduction && new CopyPlugin({
+    // 将public下面的资源复制到dist目录去（除了index.html）
+    isProduction && new CopyPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, "../public"),
@@ -281,9 +284,9 @@ module.exports = {
     },
   },
   resolve: {
-    extensions: [".jsx",'...'],
+    extensions: [".jsx", '...'],
     alias: {
-      "@": path.resolve(__dirname,"../src"), // 目录快捷方式配置
+      "@": path.resolve(__dirname, "../src"), // 目录快捷方式配置
     },
   },
   devServer: {
@@ -292,7 +295,7 @@ module.exports = {
     port: 3000,
     hot: true,
     compress: true,
-    historyApiFallback:{
+    historyApiFallback: {
       disableDotRule: true,
     },
     proxy: {
@@ -301,7 +304,7 @@ module.exports = {
         // pathRewrite: { '^/api': '' },
       },
     },
-    
+
   },
   // 给定一个创建后超过 250kb 的资源
   // performance: {

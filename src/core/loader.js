@@ -1,5 +1,5 @@
 
-import { clientLoader  } from '@/pages/Home'
+// import { clientLoader  } from '@/pages/Home'
 export default  {
     
 }

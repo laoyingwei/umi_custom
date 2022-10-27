@@ -1,9 +1,13 @@
-import { Outlet } from 'react-router-dom'
-import request from '@/utils/request'
+import { Outlet } from 'react-router-dom';
+import request from '@/utils/request';
+import { useAppData, useRouteData, useClientLoaderData, useLocalData, setLocale, LocaleContext } from '@/core/index';
 const Layout = (props) =>{
-
+    const clientLoaderData = useClientLoaderData()
     return <div>
                 我是最大的页面啊士大夫大师傅
+                {
+                    JSON.stringify(clientLoaderData.data)
+                }
                 <Outlet />
 
             </div>
@@ -12,5 +16,9 @@ const Layout = (props) =>{
 export default Layout
 
 export async function clientLoader () {
-     return request.get('user/info')
+     await request.get('user/info')
+
+     return {
+        name:'我是最大的页面'
+     }
 }

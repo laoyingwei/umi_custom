@@ -13,10 +13,9 @@ export const Access = (data) => {
     return <AccessContext.Consumer>
         {
             e => {
-                console.log(e)
-                console.log(data)
-           
-                if(e.includes(data.auth)) {
+                
+                const { permission } = e;
+                if(permission.includes(data.auth)) {
                     return <Button>能看见</Button>
                 }
                 return null

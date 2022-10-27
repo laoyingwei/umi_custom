@@ -2,6 +2,8 @@ import { AlipayCircleOutlined, LockOutlined, MobileOutlined, TaobaoCircleOutline
 import { LoginForm, ProFormCaptcha, ProFormCheckbox, ProFormText, } from '@ant-design/pro-components';
 import { message, Space, Tabs } from 'antd';
 import { useState } from 'react';
+import LoginModule from './login.module.css';
+
 const iconStyles = {
     marginInlineStart: '16px',
     color: 'rgba(0, 0, 0, 0.2)',
@@ -11,7 +13,7 @@ const iconStyles = {
 };
 export default () => {
     const [loginType, setLoginType] = useState('phone');
-    return (<div style={{ backgroundColor: 'white' }}>
+    return (<div  className={LoginModule.loginContainer} >
         <LoginForm logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png" title="Github" subTitle="全球最大的代码托管平台" actions={<Space>
             其他登录方式
             <AlipayCircleOutlined style={iconStyles} />

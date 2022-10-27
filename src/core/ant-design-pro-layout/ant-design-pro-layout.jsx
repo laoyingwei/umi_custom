@@ -254,7 +254,10 @@ export default () => {
       }} onMenuHeaderClick={(e) => console.log(e)} menuItemRender={(item, dom) => (<div onClick={(e) => {
         e.stopPropagation();
         e.preventDefault();
-        navigate(item.path)
+        if(location.pathname !== item.path) {
+          navigate(item.path)
+        }
+      
       }}>
         {dom}
       </div>)} {...settings}>
@@ -284,13 +287,12 @@ export default () => {
       </PageContainer>
 
       {/* 生产环境隐藏 */}
-      {
+      {/* {
         process.env.NODE_ENV === "production" ? null : <SettingDrawer pathname={location.pathname} enableDarkTheme getContainer={() => document.getElementById('test-pro-layout')} settings={settings} onSettingChange={(changeSetting) => {
           setSetting(changeSetting);
         }} disableUrlParams={false} />
-      }
+      } */}
 
     </ProLayout>
-    <Outlet />
   </div>);
 };

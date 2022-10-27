@@ -8,7 +8,7 @@ export function createClientRoutes (opts) {
    const data = Object.keys(routesById).filter(id => {
         return routesById[id].parentId === parentId
     }).map((id) => {
-
+       
        const route =  createClientRoute({
             route: routesById[id],
             routeComponent: routeComponents[id],
@@ -62,7 +62,6 @@ function DefaultLoading () {
 function createClientRoute (opts) {
     const { route } = opts
     const { redirect, ...props } = route;
-    
     return {
         element: redirect ? (
           <NavigateWithParams to={redirect} />
@@ -81,7 +80,8 @@ function createClientRoute (opts) {
         ),
         ...props,
       };
-
+  
+ 
 }
 
 

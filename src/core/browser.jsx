@@ -1,9 +1,9 @@
 
 import ReactDOM from 'react-dom/client';
-import { matchRoutes, Router, useRoutes, BrowserRouter, } from 'react-router-dom';
+import { matchRoutes, Router, useRoutes, BrowserRouter, Navigate } from 'react-router-dom';
 import { useAppData, AppContext } from './appContext'
 import React, { useEffect,useState,useCallback   } from 'react';
-import { createClientRoutes } from './createClientRoutes'
+import { createClientRoutes } from './createClientRoutes';
 let root = null;
 import loader from './loader'
 
@@ -34,6 +34,8 @@ function BrowserRoutes(props) {
     history.listen(onRouteChange);
     onRouteChange({ location: state.location, action: state.action });
   }, [history, props.routes, props.clientRoutes]);
+
+  
   return (
     <Router
       navigator={history}
@@ -47,7 +49,8 @@ function BrowserRoutes(props) {
 
 export function Routes() {
   const _useAppData = useAppData(),
-    clientRoutes = _useAppData.clientRoutes;
+  clientRoutes = _useAppData.clientRoutes;
+
 
   return useRoutes(clientRoutes);
 }
@@ -96,10 +99,10 @@ export const renderClient = (opts) => {
       args: {},
     });
   }
-
+  // const loaderImplement = {}
   function Browser() {
     const [clientLoaderData, setClientLoaderData] = useState({});
-
+   
     const handleRouteChange = useCallback((id,isFirst) => {
       const matchedRouteIds = (
         matchRoutes(clientRoutes, id, basename)?.map(
@@ -107,30 +110,31 @@ export const renderClient = (opts) => {
           (route) => route.route.id,
         ) || []
       ).filter(Boolean);
-      // console.log(matchedRouteIds)
-      // debugger
       matchedRouteIds.forEach(id => {
         const clientLoader = loader[id] ;
-        // && !clientLoaderData[id] 
-        if (clientLoader) {
-          clientLoader().then((data) => {
-            setClientLoaderData((d) => ({ ...d, [id]: data || {} }));
-          }).catch(e =>{
-            setClientLoaderData((d) => ({ ...d, [id]:  {} }));
-          })
+        // && !loaderImplement[id]
+        if (clientLoader && !clientLoaderData[id] ) {
+          // loaderImplement[id] = true
+            // debugger
+            clientLoader().then((data) => {
+              setClientLoaderData((d) => ({ ...d, [id]: data || {} }));
+              // loaderImplement[id] = true
+            }).catch(e =>{
+              setClientLoaderData((d) => ({ ...d, [id]:  {} }));
+              // loaderImplement[id] = true
+            })
+        
         }
       })
     },[clientLoaderData])
-    
-
-
     useEffect(() => {
       handleRouteChange(window.location.pathname,true)
       return opts.history.listen((e) => {
-        // debugger
         handleRouteChange(e.location.pathname);
       });
     },[])
+  
+   
 
     return <AppContext.Provider
       value={{

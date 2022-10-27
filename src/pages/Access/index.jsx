@@ -18,7 +18,9 @@ export default () => {
 
 export async function clientLoader () {
     console.log('执行了Access')
-    const data = await request.get('user/info')
+    const data = await request.get('user/info',{
+        hideMessage:true
+    })
 
     return data
     // return new Promise((resolve,reject) =>{

@@ -18,7 +18,7 @@ let g_intl = ''
 const localeInfo = {
   'en-US': {
     messages: {
-      ... (customeEnUS ? customeEnUS : {}),
+      ... (customeEnUS || {}),
     },
     locale: 'en-US',
     antd: {
@@ -93,7 +93,7 @@ const getLocale = () => {
 
 export const setLocale = (lang, realReload) => {
   const updater = () => {
-    // if (getLocale() !== lang) {
+    if (getLocale() !== lang) {
       if (navigator.cookieEnabled && typeof window.localStorage !== 'undefined' && useLocalStorage) {
         window.localStorage.setItem('umi_locale', lang || '');
      }
@@ -108,10 +108,36 @@ export const setLocale = (lang, realReload) => {
           window.dispatchEvent(event);
         }
       }
-    // }
+    }
   }
   updater()
 }
+
+export const addLocale = (opts = {}) => {
+  const {
+    name,
+    messages,
+    extraLocales,
+  } = opts
+  const { momentLocale, antd } = extraLocales
+
+  if(!name) return;
+
+  const merageMessage = localeInfo[name]?.messages ? Object.assign({},localeInfo[name].messages,messages) : messages
+  const locale = name.split('-').join('-')
+  localeInfo[name] = {
+    messages:merageMessage,
+    locale,
+    momentLocale,
+    antd
+
+  }
+  if(locale === getLocale()) {
+      event.emit(LANG_CHANGE_EVENT,locale)
+  }
+
+}
+
 
 
 const getDirection = () => {

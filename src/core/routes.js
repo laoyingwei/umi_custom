@@ -4,7 +4,6 @@ import React from 'react';
 import { routeConfig } from '/.umi.js'
 import loader from './loader'
 
-
 export async function getRoutes() {
   const routes = {}
   const routeComponents = {}
@@ -63,7 +62,7 @@ export async function getRoutes() {
           loader[index] = clientLoader
         }
        
-        routeComponents[index] = component
+        routeComponents[index] =component
       }
 
   })
