@@ -14,6 +14,7 @@ const aliyunTheme = require('@ant-design/aliyun-theme');
 const { getThemeVariables } = require('antd/dist/theme');
 // 需要通过 cross-env 定义环境变量
 const isProduction = process.env.NODE_ENV === "production";
+
 const getStyleLoaders = (preProcessor) => {
   return [
     isProduction ? MiniCssExtractPlugin.loader : "style-loader",
@@ -162,6 +163,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "../public/index.html"),
+      title:'你大爷的'
     }),
     isProduction &&
     new MiniCssExtractPlugin({
