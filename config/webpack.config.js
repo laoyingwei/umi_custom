@@ -14,7 +14,8 @@ const aliyunTheme = require('@ant-design/aliyun-theme');
 const { getThemeVariables } = require('antd/dist/theme');
 // 需要通过 cross-env 定义环境变量
 const isProduction = process.env.NODE_ENV === "production";
-const htmlTitle = 'react项目'
+const htmlTitle = 'react项目';
+const packageName = require('../package.json').name;
 const getStyleLoaders = (preProcessor) => {
   return [
     isProduction ? MiniCssExtractPlugin.loader : "style-loader",
@@ -68,7 +69,10 @@ module.exports = {
       : "static/js/[name].chunk.js",
     assetModuleFilename: "static/media/[hash:10][ext][query]",
     clean: true,
-    publicPath: isProduction ? '/dist/' : '/'
+    publicPath: isProduction ? '/dist/' : '/',
+    // library: `${packageName}-[name]`,
+    // libraryTarget: 'umd',
+    // jsonpFunction: `webpackJsonp_${packageName}`,
   },
   module: {
     rules: [
@@ -292,7 +296,7 @@ module.exports = {
   devServer: {
     open: false,
     host: "localhost",
-    port: 3000,
+    port: 3001,
     hot: true,
     compress: true,
     historyApiFallback: {

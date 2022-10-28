@@ -8,7 +8,7 @@ import { Spin } from 'antd'
 const publicPath = "/";
 const runtimePublicPath = false;
 
-export default async () => {
+export default async (rootElement = undefined) => {
   const pluginManager = getPluginManager() 
     let { routes ,routeComponents} =  await getRoutes(pluginManager)
 
@@ -28,7 +28,9 @@ export default async () => {
           const contextOpts = pluginManager.applyPlugins({
             key: 'modifyContextOpts',
             type: ApplyPluginsType.modify,
-            initialValue: {},
+            initialValue: {
+              rootElement
+            },
           });
           const basename = contextOpts.basename || '/';
           const context = {
@@ -49,7 +51,6 @@ export default async () => {
 
          return  renderClient(context);
       
-          
 
         },
       })

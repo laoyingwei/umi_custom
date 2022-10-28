@@ -3,7 +3,8 @@
 import * as Plugin_0 from '@/runtime';
 import * as Plugin_initialState from '@/core/plugin-initialState';
 import * as Plugin_access from '@/core/plugin-access';
-import * as Plugin_locale from '@/core/plugin-locale'
+import * as Plugin_locale from '@/core/plugin-locale';
+import * as Plugin_keeplive from '@/core/plugin-keeplive'
 import { assert, compose, isPromiseLike } from "./utils";
 import { ApplyPluginsType } from './ApplyPluginsType'
 import _typeof from "@babel/runtime/helpers/typeof";
@@ -99,12 +100,15 @@ export function getPlugins() {
       },
       {
         apply:Plugin_locale
-      }
+      },
+      // {
+      //   apply:Plugin_keeplive
+      // }
     ];
   }
   
   export function getValidKeys() {
-    return ['patchRoutes','patchClientRoutes','modifyContextOpts','rootContainer','innerProvider','i18nProvider','accessProvider','dataflowProvider','outerProvider','render','onRouteChange','getInitialState','layout','qiankun','request',];
+    return ['patchRoutes','patchClientRoutes','modifyContextOpts','rootContainer','innerProvider','i18nProvider','accessProvider','dataflowProvider','outerProvider','render','onRouteChange','getInitialState','layout','qiankun','request','keepAliveProvider'];
   }
   
 

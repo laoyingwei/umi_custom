@@ -1,7 +1,8 @@
 import React from 'react';
 import initialState from './@@initialState'
-import { Spin } from 'antd'
-function Loading() { return <div><Spin /></div>; }
+import { Spin } from 'antd';
+import Loading from '@/Loading';
+// function Loading() { return <div><Spin /></div>; }
 export default function InitialStateProvider(props) {
   const appLoaded = React.useRef(false);
 

@@ -85,11 +85,13 @@ export const renderClient = (opts) => {
 
   for (const key of [
     // Lowest to the highest priority
+    'keepAliveProvider',
     'innerProvider',
     'i18nProvider',
     'accessProvider',
     'dataflowProvider',
     'outerProvider',
+   
     'rootContainer',
   ]) {
     rootContainer = opts.pluginManager.applyPlugins({

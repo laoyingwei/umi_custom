@@ -6,8 +6,8 @@ const initState = {
     error: undefined,
   };
   export default () => {
-    const [ state,setState ] =  useState(initState) 
 
+    const [ state,setState ] =  useState(initState) 
     const refresh = useCallback(async () => {
         setState((s) => ({ ...s, loading: true, error: undefined }));
         try {
@@ -30,7 +30,6 @@ const initState = {
     useEffect(() => {
         refresh()
     },[])
-    // debugger
     return {
         ...state,
         refresh,

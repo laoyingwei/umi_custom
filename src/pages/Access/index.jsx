@@ -1,8 +1,15 @@
 import { useAppData,useRouteData,useClientLoaderData } from '@/core/index';
 import request from '@/utils/request';
 import { Button } from 'antd'
+import { useEffect } from 'react';
 export default () => {
     const clientLoaderData = useClientLoaderData()
+    console.log('执行了access')
+    useEffect(() => {
+        request.get('user/info',{
+            hideMessage:true
+        })
+    },[])
     return <div>
         Access 
 
@@ -17,7 +24,7 @@ export default () => {
 
 
 export async function clientLoader () {
-    console.log('执行了Access')
+    // console.log('执行了Access')
     const data = await request.get('user/info',{
         hideMessage:true
     })

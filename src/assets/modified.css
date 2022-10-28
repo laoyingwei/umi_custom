@@ -2,7 +2,8 @@
 /* stylelint-disable no-duplicate-selectors */
 /* stylelint-disable */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors,string-no-newline */
-/* 使用多种自定义主题颜色 使用 这个命令生成文件 custom 开头命名 modified 生成的文件名  lessc --js --modify-var="ant-prefix=custom" F:\learn\umi_custom\node_modules\_antd@4.23.6@antd\dist\antd.variable.less modified.css */
+/* 使用多种自定义主题颜色 使用 这个命令生成文件 custom 开头命名 modified 生成的文件名 
+  lessc --js --modify-var="ant-prefix=custom" F:\learn\umi_custom\node_modules\_antd@4.23.6@antd\dist\antd.variable.less modified.css */
 html {
   --custom-primary-color: #0064C8;
   --custom-primary-color-hover: #40a9ff;

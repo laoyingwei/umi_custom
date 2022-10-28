@@ -44,7 +44,7 @@ export async function getRoutes() {
           loader[name] = clientLoader
         }
        
-        routeComponents[name] = component
+        routeComponents[name] =component
 
       }else {
         routes[index] = {
@@ -62,7 +62,7 @@ export async function getRoutes() {
           loader[index] = clientLoader
         }
        
-        routeComponents[index] =component
+        routeComponents[index] =  component
       }
 
   })

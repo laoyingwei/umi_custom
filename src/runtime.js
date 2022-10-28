@@ -1,6 +1,7 @@
 
 import { useNavigate } from 'react-router-dom';
-
+import { keepAliveProvider } from '@/core/plugin-keeplive'
+import React from 'react';
 let extraRoutes;
 
 export function patchClientRoutes({ routes }) {
@@ -21,21 +22,21 @@ const token = false
 export function onRouteChange(opts) {
     // console.log(opts.history)
     // // debugger
-    const { location, routes } = opts
-    const { pathname } = location
-    let route = {}
-    Object.keys(routes).find(key => {
+    // const { location, routes } = opts
+    // const { pathname } = location
+    // let route = {}
+    // Object.keys(routes).find(key => {
 
-        if (routes[key].path === pathname) {
-            route = routes[key]
-            return true
-        }
-        return false
-    })
-    if (!route.auth) return false
-    if (!token && opts.location.pathname !== '/login') {
-        opts.history.replace('/login')
-    }
+    //     if (routes[key].path === pathname) {
+    //         route = routes[key]
+    //         return true
+    //     }
+    //     return false
+    // })
+    // if (!route.auth) return false
+    // if (!token && opts.location.pathname !== '/login') {
+    //     opts.history.replace('/login')
+    // }
 
 }
 
@@ -52,20 +53,37 @@ export async function getInitialState() {
     //     navigate('/login')
     //     return {}
     //   }
-    return {
+    console.log('执行')
+    return  {
         permission: [
             'canSee'
         ],
-        isLogin: true
+        isLogin: true,
+        token:true
     }
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            resolve(
+                {
+                    permission: [
+                        'canSee'
+                    ],
+                    isLogin: true,
+                    token:true
+                }
+            )
+        },1000)
+    })
+   
 
 }
 
 
 
 // export function rootContainer (container) {
-//    return  React.createElement(ConfigProvider,{
-//     // prefixCls:'custom'
-//    },container)
+
+// return React.createElement(keepAliveProvider,{
+//     keepalive:['/home']
+// },container)
 // }
 

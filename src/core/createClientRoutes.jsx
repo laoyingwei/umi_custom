@@ -2,7 +2,9 @@
 
 import { useParams,generatePath, Navigate } from 'react-router-dom'
 import { RouteContext } from './routeContext';
-import React from 'react'
+import React from 'react';
+import widthAuth from '@/widthAuth';
+import Loading from '@/Loading'
 export function createClientRoutes (opts) {
     const { routesById,routeComponents,loadingComponent,reactRouter5Compat,parentId } = opts
    const data = Object.keys(routesById).filter(id => {
@@ -83,13 +85,15 @@ function createClientRoute (opts) {
   
  
 }
-
-
 function RemoteComponent (props) {
     const Component = props.loader;
    return (
     <React.Suspense fallback={<props.loadingComponent />}>
-      <Component />
+      {/* 登录权限控制 */}
+      {
+        widthAuth(Component)
+      }
+     
     </React.Suspense>
   ); 
 }
