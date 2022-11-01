@@ -282,7 +282,7 @@ export default () => {
           minHeight: 800,
         }}>
           <Outlet />
-          <div id="qiankunVue" style="width: 100%; height: 100%" />
+         
         </ProCard>
       </PageContainer>
 
@@ -292,7 +292,7 @@ export default () => {
           setSetting(changeSetting);
         }} disableUrlParams={false} />
       } */}
-
+     
     </ProLayout>
   </div>);
 };

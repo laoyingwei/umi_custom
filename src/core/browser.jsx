@@ -6,7 +6,7 @@ import React, { useEffect,useState,useCallback   } from 'react';
 import { createClientRoutes } from './createClientRoutes';
 let root = null;
 import loader from './loader'
-
+import { registerMicroApps, start,loadMicroApp } from 'qiankun';
 
 function BrowserRoutes(props) {
   const { history } = props;
@@ -135,10 +135,10 @@ export const renderClient = (opts) => {
         handleRouteChange(e.location.pathname);
       });
     },[])
-  
-   
-
-    return <AppContext.Provider
+    // useEffect(() =>{
+    //     const st =  start();
+    // },[])
+    return   <AppContext.Provider
       value={{
         routes: opts.routes,
         routeComponents: opts.routeComponents,
@@ -160,7 +160,13 @@ export const renderClient = (opts) => {
   if (ReactDOM.createRoot) {
     root = ReactDOM.createRoot(rootElement);
     root.render(<Browser />);
+
+  
   } else {
     ReactDOM.render(<Browser />, rootElement);
   }
+
+
 }
+
+

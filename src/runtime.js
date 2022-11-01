@@ -53,7 +53,6 @@ export async function getInitialState() {
     //     navigate('/login')
     //     return {}
     //   }
-    console.log('执行')
     return  {
         permission: [
             'canSee'

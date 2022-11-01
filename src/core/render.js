@@ -5,10 +5,12 @@ import { ApplyPluginsType } from './ApplyPluginsType'
 import { createHistory } from './history';
 import { renderClient } from './browser';
 import { Spin } from 'antd'
+import { useEffect } from 'react';
+
 const publicPath = "/";
 const runtimePublicPath = false;
 
-export default async (rootElement = undefined) => {
+export default async () => {
   const pluginManager = getPluginManager() 
     let { routes ,routeComponents} =  await getRoutes(pluginManager)
 
@@ -29,7 +31,7 @@ export default async (rootElement = undefined) => {
             key: 'modifyContextOpts',
             type: ApplyPluginsType.modify,
             initialValue: {
-              rootElement
+             
             },
           });
           const basename = contextOpts.basename || '/';
@@ -48,10 +50,10 @@ export default async (rootElement = undefined) => {
             basename,
             loadingComponent:Spin
           };
+          
+         const client =   renderClient(context );
 
-         return  renderClient(context);
-      
-
+         return client
         },
       })
       render()

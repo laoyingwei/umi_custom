@@ -3,7 +3,8 @@ import React from 'react';
 import { clientLoader as homeClientLoader } from '@/pages/Home';
 import { clientLoader as accessClientLoader } from '@/pages/Access';
 import { clientLoader as globalLayoutClientLoader } from '@/layouts';
-import Login from '@/pages/Login'
+
+
 export const routeConfig = [
     {
         name: 'ant-design-pro-layout',
@@ -47,7 +48,8 @@ export const routeConfig = [
                         path: '/table',
                         component: React.lazy(() => import(/* webpackChunkName: "p__Table__index" */'@/pages/Table/index.jsx')),
                         title: 'table'
-                    }
+                    },
+                  
                 ]
             }
         ]
@@ -63,11 +65,27 @@ export const routeConfig = [
     },
     {
         name: 'ant-design-pro-login',
-        "isLayout": true,
+        
         path: '/login',
         component: React.lazy(() => import(/* webpackChunkName: ".umi__plugin-layout__login" */'@/pages/Login')),
         ///权限用的
         auth: false,
         hideMenu: true
     },
+    {
+        title: '微应用',
+        path:'/yourActiveRule',
+        // component: React.lazy(() => import(/* webpackChunkName: "p__Qiankun" */'@/pages/Qiankun')),
+        component:  require('@/Qiankun').default,
+      
+    },
+  
+    {
+        title: '微应用1',
+        path:'/yourActiveRule1',
+        // component: React.lazy(() => import(/* webpackChunkName: "p__Qiankun" */'@/pages/Qiankun1')),
+        component:  require('@/Qiankun').default,
+        
+    }
+   
 ]

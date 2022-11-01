@@ -1,25 +1,21 @@
 import './App.less';
 import render from '@/core/render'
-
-
-
-import { registerMicroApps, start } from 'qiankun';
-
+import { registerMicroApps, start,loadMicroApp } from 'qiankun';
+render()
 registerMicroApps([
   {
-    name: 'webpack5-react', // app name registered
-    entry: '//localhost:8000',
-    container: '#qiankunVue',
-    activeRule: '/yourActiveRule',
+  name: 'react_qian', // app name registered
+  entry: '//localhost:3000',
+  container: '#container',
+  activeRule: '/yourActiveRule',
+  // render: document.getElementById('container')
   },
-//   {
-//     name: 'vue app',
-//     entry: { scripts: ['//localhost:7100/main.js'] },
-//     container: '#yourContainer2',
-//     activeRule: '/yourActiveRule2',
-//   },
+  {
+    name: 'react_qian1', // app name registered
+    entry: '//localhost:8050',
+    container: '#container',
+    activeRule: '/yourActiveRule1',
+    // render: document.getElementById('container')
+    },
 ]);
-
-start();
-render()
 
