@@ -86,6 +86,13 @@ export const routeConfig = [
         // component: React.lazy(() => import(/* webpackChunkName: "p__Qiankun" */'@/pages/Qiankun1')),
         component:  require('@/Qiankun').default,
         
+    },
+    {
+        title: '微应用Vue',
+        path:'/vue',
+        // component: React.lazy(() => import(/* webpackChunkName: "p__Qiankun" */'@/pages/Qiankun1')),
+        component:  require('@/Qiankun').default,
+        
     }
    
 ]

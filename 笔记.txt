@@ -1,0 +1,45 @@
+qiankun 子应用
+
+
+import './public-path';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+const state = {
+  name: 'aafsdfasf'
+}
+
+function render(props) {
+  const { container } = props;
+  ReactDOM.render(<App />, container ? container.querySelector('#root') : document.querySelector('#root'));
+}
+
+if (!window.__POWERED_BY_QIANKUN__) {
+  render({});
+}
+
+export async function bootstrap() {
+  console.log('[react16] react app bootstraped');
+}
+
+export async function mount(props) {
+
+  props.onGlobalStateChange((state, prev) => {
+    // state: 变更后的状态; prev 变更前的状态
+    console.log(state, prev);
+  });
+
+  props.setGlobalState(state);
+
+
+  render(props);
+}
+
+export async function unmount(props) {
+  const { container } = props;
+  ReactDOM.unmountComponentAtNode(container ? container.querySelector('#root') : document.querySelector('#root'));
+}
+
+
+地址  https://qiankun.umijs.org/zh/guide/tutorial#react-%E5%BE%AE%E5%BA%94%E7%94%A8

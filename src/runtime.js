@@ -81,8 +81,6 @@ export async function getInitialState() {
 
 // export function rootContainer (container) {
 
-// return React.createElement(keepAliveProvider,{
-//     keepalive:['/home']
-// },container)
+//     return container
 // }
 

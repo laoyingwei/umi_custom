@@ -170,7 +170,7 @@ module.exports = {
       title: htmlTitle,
       // 这个地址是相对于绝对路径下的 public 目录的意思
       favicon: './public/favicon.ico',
-      
+
     }),
     isProduction &&
     new MiniCssExtractPlugin({
