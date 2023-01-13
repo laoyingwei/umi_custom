@@ -6,8 +6,15 @@ export default () => {
     const clientLoaderData = useClientLoaderData()
     console.log('执行了access')
     useEffect(() => {
-        request.get('user/info',{
-            hideMessage:true
+        // request.get('/user/info',{
+        //     hideMessage:true
+        // })
+        // name:'123'
+        // name:'123' 
+        request.post('/user',{ data:{name:'123'  } }).then(res =>{
+            console.log(res)
+        }).catch(e =>{
+            console.log(e)
         })
     },[])
     return <div>
@@ -25,11 +32,13 @@ export default () => {
 
 export async function clientLoader () {
     // console.log('执行了Access')
-    const data = await request.get('user/info',{
-        hideMessage:true
-    })
+    // const data = await request.get('user/info',{
+    //     hideMessage:true
+    // })
 
-    return data
+    return {
+        a:'1'
+    }
     // return new Promise((resolve,reject) =>{
 
     //     setTimeout(() => {

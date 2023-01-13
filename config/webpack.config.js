@@ -205,7 +205,7 @@ module.exports = {
 
     ///全局变量 设置
     new webpack.DefinePlugin({
-      NODE_SERVICE_URL: JSON.stringify(isProduction ? 'http://localhost:80/api' : '/api'),
+      NODE_SERVICE_URL: JSON.stringify(isProduction ? 'http://localhost:80/api' : '/api/'),
     }),
 
 
@@ -304,8 +304,8 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
-        // pathRewrite: { '^/api': '' },
+        target: 'http://localhost:3000',
+        pathRewrite: { '^/api': '' },
       },
     },
 

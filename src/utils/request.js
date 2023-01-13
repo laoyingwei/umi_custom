@@ -29,17 +29,17 @@ const codeMessage = {
  */
 
 const errorHandler = (error) => {
-  const { response } = error;
+  const { message: response } = error;
   const { request } = error || {}
   const { options } = request || {}
   ///hideMessage 隐藏弹框
   const { hideMessage } = options || {}
   if (!hideMessage) {
-    if (response && response.status) {
-      const errorText = codeMessage[response.status] || response.statusText;
-      const { status, url } = response;
+    if (response && response.statusCode) {
+      const errorText = codeMessage[response.statusCode] || response.statusText;
+      const { statusCode, } = response;
       notification.error({
-        message: `请求错误 ${status}: ${url}`,
+        message: `请求错误 ${statusCode}: ${options.url}`,
         description: errorText,
       });
     } else if (!response) {
@@ -47,7 +47,10 @@ const errorHandler = (error) => {
         description: '您的网络发生异常，无法连接服务器',
         message: '网络异常',
       });
+      ///不用 new 对象
+
     }
+    return Promise.reject(response)
   }
 
 
@@ -85,9 +88,13 @@ request.interceptors.request.use((url, options) => {
 
 
 request.interceptors.response.use(async response => {
-
   const data = await response.clone().json();
-  return data.data;
-})
+  ///不用 new 对象
 
+  if (!data || !data.success) {
+    return Promise.reject(data)
+
+  }
+  return data.data
+})
 export default request;

@@ -132,10 +132,10 @@ const menu = (<Menu items={[
     export default () => {
         const actionRef = useRef();
         return (<ProTable columns={columns} actionRef={actionRef} cardBordered request={async (params = {}, sort, filter) => {
-                console.log(sort, filter);
-                return request('https://proapi.azurewebsites.net/github/issues', {
-                    params,
-                });
+                // console.log(sort, filter);
+                // return request('https://proapi.azurewebsites.net/github/issues', {
+                //     params,
+                // });
             }} editable={{
                 type: 'multiple',
             }} columnsState={{
@@ -177,9 +177,9 @@ const menu = (<Menu items={[
 
 export async function clientLoader() {
     console.log('执行了Access')
-    const data = await request.get('user/info',{
-        hideMessage:true
-    })
+    // const data = await request.get('user/info',{
+    //     hideMessage:true
+    // })
 
     return {
         name: '我是你爸爸'
